@@ -267,10 +267,7 @@ main :: proc() {
     
     fmt.printf("simd   energy:  %.9f\n", energy_soa_stack_simd(&sys))
 
-    start := time.tick_now()
     advance_stack_simd(&sys, 0.01, n)
-    duration := time.tick_since(start)
 
     fmt.printf("simd   energy:  %.9f\n", energy_soa_stack_simd(&sys))
-    fmt.eprintf("Odin time: %.3f µs\n", f64(duration) / f64(time.Microsecond))
 }
