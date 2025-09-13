@@ -13,9 +13,9 @@ SOLAR_MASS :: 4.0 * PI * PI
 DAYS_PER_YEAR :: 365.24
 TOTAL_BODIES :: 5
 
-// Stack-allocated SOA layout using fixed arrays
+// Stack-allocated SOA layout
 Body_SOA_Stack :: struct #align(32) {
-    pos_x:   [TOTAL_BODIES]f64,  // Fixed size arrays on stack
+    pos_x:   [TOTAL_BODIES]f64,
     pos_y:   [TOTAL_BODIES]f64,
     pos_z:   [TOTAL_BODIES]f64,
     vel_x:   [TOTAL_BODIES]f64,
@@ -33,23 +33,39 @@ init_system_soa_stack :: #force_inline proc() -> Body_SOA_Stack {
     sys.mass[0] = SOLAR_MASS
     
     // Jupiter
-    sys.pos_x[1] = 4.84143144246472090e+00; sys.pos_y[1] = -1.16032004402742839e+00; sys.pos_z[1] = -1.03622044471123109e-01
-    sys.vel_x[1] = 1.66007664274403694e-03 * DAYS_PER_YEAR; sys.vel_y[1] = 7.69901118419740425e-03 * DAYS_PER_YEAR; sys.vel_z[1] = -6.90460016972063023e-05 * DAYS_PER_YEAR
+    sys.pos_x[1] = 4.84143144246472090e+00;
+    sys.pos_y[1] = -1.16032004402742839e+00;
+    sys.pos_z[1] = -1.03622044471123109e-01
+    sys.vel_x[1] = 1.66007664274403694e-03 * DAYS_PER_YEAR;
+    sys.vel_y[1] = 7.69901118419740425e-03 * DAYS_PER_YEAR;
+    sys.vel_z[1] = -6.90460016972063023e-05 * DAYS_PER_YEAR
     sys.mass[1] = 9.54791938424326609e-04 * SOLAR_MASS
     
     // Saturn
-    sys.pos_x[2] = 8.34336671824457987e+00; sys.pos_y[2] = 4.12479856412430479e+00; sys.pos_z[2] = -4.03523417114321381e-01
-    sys.vel_x[2] = -2.76742510726862411e-03 * DAYS_PER_YEAR; sys.vel_y[2] = 4.99852801234917238e-03 * DAYS_PER_YEAR; sys.vel_z[2] = 2.30417297573763929e-05 * DAYS_PER_YEAR
+    sys.pos_x[2] = 8.34336671824457987e+00;
+    sys.pos_y[2] = 4.12479856412430479e+00;
+    sys.pos_z[2] = -4.03523417114321381e-01
+    sys.vel_x[2] = -2.76742510726862411e-03 * DAYS_PER_YEAR;
+    sys.vel_y[2] = 4.99852801234917238e-03 * DAYS_PER_YEAR;
+    sys.vel_z[2] = 2.30417297573763929e-05 * DAYS_PER_YEAR
     sys.mass[2] = 2.85885980666130812e-04 * SOLAR_MASS
     
     // Uranus
-    sys.pos_x[3] = 1.28943695621391310e+01; sys.pos_y[3] = -1.51111514016986312e+01; sys.pos_z[3] = -2.23307578892655734e-01
-    sys.vel_x[3] = 2.96460137564761618e-03 * DAYS_PER_YEAR; sys.vel_y[3] = 2.37847173959480950e-03 * DAYS_PER_YEAR; sys.vel_z[3] = -2.96589568540237556e-05 * DAYS_PER_YEAR
+    sys.pos_x[3] = 1.28943695621391310e+01;
+    sys.pos_y[3] = -1.51111514016986312e+01;
+    sys.pos_z[3] = -2.23307578892655734e-01
+    sys.vel_x[3] = 2.96460137564761618e-03 * DAYS_PER_YEAR;
+    sys.vel_y[3] = 2.37847173959480950e-03 * DAYS_PER_YEAR;
+    sys.vel_z[3] = -2.96589568540237556e-05 * DAYS_PER_YEAR
     sys.mass[3] = 4.36624404335156298e-05 * SOLAR_MASS
     
     // Neptune
-    sys.pos_x[4] = 1.53796971148509165e+01; sys.pos_y[4] = -2.59193146099879641e+01; sys.pos_z[4] = 1.79258772950371181e-01
-    sys.vel_x[4] = 2.68067772490389322e-03 * DAYS_PER_YEAR; sys.vel_y[4] = 1.62824170038242295e-03 * DAYS_PER_YEAR; sys.vel_z[4] = -9.51592254519715870e-05 * DAYS_PER_YEAR
+    sys.pos_x[4] = 1.53796971148509165e+01;
+    sys.pos_y[4] = -2.59193146099879641e+01;
+    sys.pos_z[4] = 1.79258772950371181e-01
+    sys.vel_x[4] = 2.68067772490389322e-03 * DAYS_PER_YEAR;
+    sys.vel_y[4] = 1.62824170038242295e-03 * DAYS_PER_YEAR;
+    sys.vel_z[4] = -9.51592254519715870e-05 * DAYS_PER_YEAR
     sys.mass[4] = 5.15138902046611451e-05 * SOLAR_MASS
     
     return sys
