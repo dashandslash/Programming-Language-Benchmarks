@@ -189,23 +189,6 @@ advance_stack_simd :: #force_inline proc(sys: ^Body_SOA_Stack, dt: f64, n: int) 
     }
 }
 
-energy_soa_stack :: #force_inline proc(sys: ^Body_SOA_Stack) -> f64 {
-    e := 0.0
-    #unroll for i in 0..<TOTAL_BODIES {
-        speed2 := sys.vel_x[i]*sys.vel_x[i] + sys.vel_y[i]*sys.vel_y[i] + sys.vel_z[i]*sys.vel_z[i]
-        e += 0.5 * sys.mass[i] * speed2
-
-        #no_bounds_check for j in (i + 1)..<TOTAL_BODIES {
-            dx := sys.pos_x[i] - sys.pos_x[j]
-            dy := sys.pos_y[i] - sys.pos_y[j]
-            dz := sys.pos_z[i] - sys.pos_z[j]
-            distance := math.sqrt_f64(dx*dx + dy*dy + dz*dz)
-            e -= sys.mass[i] * sys.mass[j] / distance
-        }
-    }
-    return e
-}
-
 energy_soa_stack_simd :: #force_inline proc(sys: ^Body_SOA_Stack) -> f64 {
     e := 0.0
     #unroll for i in 0..<TOTAL_BODIES {
@@ -245,18 +228,6 @@ energy_soa_stack_simd :: #force_inline proc(sys: ^Body_SOA_Stack) -> f64 {
         }
     }
     return e
-}
-
-offset_momentum_soa_stack :: #force_inline proc(sys: ^Body_SOA_Stack) {
-    px, py, pz := 0.0, 0.0, 0.0
-    #unroll for i in 0..<TOTAL_BODIES {
-        px -= sys.vel_x[i] * sys.mass[i]
-        py -= sys.vel_y[i] * sys.mass[i]
-        pz -= sys.vel_z[i] * sys.mass[i]
-    }
-    sys.vel_x[0] = px / SOLAR_MASS
-    sys.vel_y[0] = py / SOLAR_MASS
-    sys.vel_z[0] = pz / SOLAR_MASS
 }
 
 offset_momentum_soa_stack_simd :: #force_inline proc(sys: ^Body_SOA_Stack) {
